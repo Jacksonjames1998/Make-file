@@ -1,4 +1,5 @@
 #TARGETS
+#target: prerequisite
 
 build:
 	g++ main.cpp -c main.o
