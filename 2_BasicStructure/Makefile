@@ -2,7 +2,7 @@
 #target: prerequisite
 
 build: mylib.o main.o
-	g++ main.o mylib.o -o main
+	g++ main.o mylib.o -o bin/main
 
 main.o:
 	g++ main.cpp -c
@@ -10,7 +10,7 @@ mylib.o:
 	g++ mylib.cpp -c
 
 execute:
-	./main
+	./bin/main
 
 clean:
 	rm -f *.o
