@@ -16,13 +16,18 @@ CXX_COMPILER_CALL = $(CXX) $(CXXFLAGS)
 
 ifeq ($(DEBUG),1)
 CXXFLAGS += -g -O0
+EXECUTABLE_NAME = mainDebug
 else
 CXXFLAGS += -O3
+EXECUTABLE_NAME = mainRelease
 endif
 
-CXX_OBJECTS = mylib.o main.o
+CXX_SOURCES = $(wildcard *.cpp)
+CXX_OBJECTS = $(patsubst %.cpp, %.o, $(CXX_SOURCES))
 build: $(CXX_OBJECTS)
 	$(CXX_COMPILER_CALL) $(CXX_OBJECTS) -o bin/$(EXECUTABLE_NAME)
+	echo $(CXX_SOURCES)
+	echo $(CXX_OBJECTS)
 
 # main.o:
 # 	$(CXX_COMPILER_CALL) main.cpp -c
@@ -30,11 +35,11 @@ build: $(CXX_OBJECTS)
 # 	$(CXX_COMPILER_CALL) mylib.cpp -c
 
 execute:
-	./bin/main
+	./bin/$(EXECUTABLE_NAME)
 
 clean:
 	rm -f *.o
-	rm -f main
+	rm -f bin/$(EXECUTABLE_NAME)
 
 #PATTERNS
 #$@ - the file name of the target
